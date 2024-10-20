@@ -3,8 +3,11 @@
 
 Simple .NET 8 template with everything set up to show basic movie data with CRUD and server side HTML rendering
 
-# Why?
+# Tested on:
+Windows 10 VS 2022 and VSCode (works fully)
+Linux JS and dotnet work, database and db migrations don't work but everything else works. I suggest re-creating the migrations or updating the packages to a different sqlite library. Also check all of the filepaths in the code.
 
+# Why?
 To write little or no javascript
 
 ## Prerequisites
@@ -23,10 +26,11 @@ To get a local copy up and running follow these simple steps:
 
 1. **Install necessary packages**
 
-   Make sure all the required NuGet packages are restored:
+   Make sure all the required NuGet and NPM packages are restored:
 
    ```bash
    dotnet restore
+   npm install
    ```
 
 2. **Run Migrations**
@@ -35,6 +39,12 @@ To get a local copy up and running follow these simple steps:
 
    ```bash
    dotnet ef database update
+   ```
+2. **Build css**
+
+   Build tailwind css. (Change this as you see fit into one build script for convenience, add hot reloading for views on build, there should be a way) 
+   ```bash
+   npm run build:css
    ```
 
 ## Usage
