@@ -66,5 +66,4 @@ dotnet run
 4.  **Combine tailwind classes to compress HTML more**
 5.  **Improve the logic in the HtmxRequest attribute, it renders either a partial, or a full viewpage with layout depending on if it's the first time rendering or not.**
 6.  **If you want pure html with as little JS as possible use some of the built in razor directives e.g @Html.Action, which will help with rendering**
-7.  **Replace the custom htmx.AddExtension("submitjson") with a library if it exists, unfortunately htmx doesn't make it easy to send form data as JSON, I don't know why.**
-8.  **When defining and returning a partial view make sure to not add the @page{} directive otherwise your model will be null with no clear error indicating why. **
+7.  **Replace the custom htmx.AddExtension("submitjson") with a library if it exists, unfortunately htmx doesn't make it easy to send form data as JSON.**
