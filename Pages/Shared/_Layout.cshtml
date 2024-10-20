@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My App</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/js/htmx.min.js"></script>
+    <script>
+        htmx.defineExtension('submitjson', {
+            onEvent: function (name, evt) {
+                if (name === "htmx:configRequest") {
+                    evt.detail.headers['Content-Type'] = "application/json";
+                }
+            },
+            encodeParameters: function (xhr, parameters, elt) {
+                xhr.overrideMimeType('application/json'); // override default mime type
+                return (JSON.stringify(parameters));
+            }
+        })
+        htmx.defineExtension('submitjson-list', {
+            onEvent: function (name, evt) {
+                if (name === "htmx:configRequest") {
+                    evt.detail.headers['Content-Type'] = "application/json";
+                }
+            },
+            encodeParameters: function (xhr, parameters, elt) {
+                xhr.overrideMimeType('application/json'); // override default mime type
+                console.log([parameters]);
+                return "[" + JSON.stringify(parameters) + "]";
+            }
+        })
+    </script>
+</head>
+<body>
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        @await Html.PartialAsync("_Navigation")
+
+        <!-- Main Content -->
+        @RenderBody()
+        
+    </div>
+
+    <footer>
+        @RenderSection("Scripts", required: false)
+    </footer>
+</body>
+</html>

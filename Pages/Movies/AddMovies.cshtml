@@ -1,0 +1,84 @@
+﻿@page
+@{
+
+}
+
+<main role="main" class="flex-1 p-8">
+
+    <h1 class="text-color-orange text-5xl font-bold">Add Movie</h1>
+
+    <p>Add a new movie here:</p>
+
+    <form hx-post="/api/movies"
+          hx-trigger="submit"
+          hx-swap="none"  
+          hx-encoding="application/json"
+          hx-ext="submitjson-list"
+          class="space-y-6 rounded-md bg-white p-6 shadow-md">
+
+        <div class="grid-cols-2 grid items-center gap-x-4 gap-y-4">
+
+            <label for="title" class="font-semibold text-gray-700">Movie Title</label>
+            <input type="text" id="title" name="Title"
+                   class="w-full rounded-md border border-gray-300 p-2"
+                   placeholder="Enter the movie title" required />
+
+            <label for="genre" class="font-semibold text-gray-700">Genre</label>
+            <input type="text" id="genre" name="Genre"
+                   class="w-full rounded-md border border-gray-300 p-2"
+                   placeholder="Enter the genre" required />
+
+            <label for="releaseDate" class="font-semibold text-gray-700">Release Date</label>
+            <input type="date" id="releaseDate" name="ReleaseDate"
+                   class="w-full rounded-md border border-gray-300 p-2"
+                   required />
+        </div>
+
+        <div class="mt-4 flex justify-end">
+            <button type="submit"
+                    class="rounded bg-green-500 px-4 py-2 font-bold text-white shadow-md hover:bg-green-600">
+                Add Movie
+            </button>
+        </div>
+    </form>
+
+    <div id="popup" class="fixed bottom-4 right-4 hidden rounded-md px-4 py-2 shadow-md">
+        <span id="popup-message"></span>
+    </div>
+
+</main>
+
+<script>
+    htmx.on('htmx:afterOnLoad', function (evt) {
+        const popup = document.getElementById('popup');
+        const popupMessage = document.getElementById('popup-message');
+
+        popup.classList.add('bg-green-500', 'text-white'); // Success style
+        popup.classList.remove('bg-red-500');
+        popupMessage.innerText = "Movie added successfully!";
+
+        // Show the popup
+        popup.classList.remove('hidden');
+
+        // Hide the popup after 3 seconds
+        setTimeout(() => {
+            popup.classList.add('hidden');
+        }, 3000);
+    });
+    htmx.on('htmx:responseError', function (evt) {
+        const popup = document.getElementById('popup');
+        const popupMessage = document.getElementById('popup-message');
+
+        popup.classList.add('bg-red-500', 'text-white'); // Error style
+        popup.classList.remove('bg-green-500');
+        popupMessage.innerText = "Failed to add movie!";
+        
+        // Show the popup
+        popup.classList.remove('hidden');
+
+        // Hide the popup after 3 seconds
+        setTimeout(() => {
+            popup.classList.add('hidden');
+        }, 3000);
+    });
+</script>
