@@ -9,7 +9,7 @@ Simple .NET 8 template with everything set up to show basic movie data with CRUD
 
 - Linux DB migrations don't work but everything else works.
   
-I suggest re-creating the migrations or updating the packages to a different sqlite library. Also check all of the filepaths in the code including in package.json.
+for linux systems try re-creating the migrations or updating the packages to a different sqlite library. Also check all of the filepaths in the code including in package.json.
 
 
 # Why?
@@ -53,7 +53,7 @@ To get a local copy up and running follow these simple steps:
 
 ## Usage
 
-Start the API locally by running, or start it in visual studio with IIS
+Start the API locally by running the code below, or start it in visual studio with IIS
 
 ```bash
 dotnet run
