@@ -4,8 +4,12 @@
 Simple .NET 8 template with everything set up to show basic movie data with CRUD and server side HTML rendering
 
 # Tested on:
-Windows 10 VS 2022 and VSCode (works fully)
-Linux JS and dotnet work, database and db migrations don't work but everything else works. I suggest re-creating the migrations or updating the packages to a different sqlite library. Also check all of the filepaths in the code.
+
+Windows 10 works
+
+Linux, DB migrations don't work but everything else works. 
+I suggest re-creating the migrations or updating the packages to a different sqlite library. Also check all of the filepaths in the code including in package.json.
+
 
 # Why?
 To write little or no javascript
@@ -15,7 +19,6 @@ To write little or no javascript
 Before you begin, ensure you have the following installed:
 - .NET 8.0 SDK
 - Entity Framework Core CLI
-- 
 ```bash
   dotnet tool install --global dotnet-ef
 ```
