@@ -3,11 +3,11 @@
 
 Simple .NET 8 template with everything set up to show basic movie data with CRUD and server side HTML rendering
 
-# Tested on:
+# Tested on
 
-Windows 10 works
+-- Windows 10 
 
-Linux, DB migrations don't work but everything else works. 
+-- Linux DB migrations don't work but everything else works. 
 I suggest re-creating the migrations or updating the packages to a different sqlite library. Also check all of the filepaths in the code including in package.json.
 
 
