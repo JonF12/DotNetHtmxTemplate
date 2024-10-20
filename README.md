@@ -1,5 +1,5 @@
 
-# DotNet Htmx TypeScript Tailwind template with razor views and API
+# .Net Htmx TypeScript Tailwind template with razor views and API
 
 Simple .NET 8 template with everything set up to show basic movie data with CRUD and server side HTML rendering
 
