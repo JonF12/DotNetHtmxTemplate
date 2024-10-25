@@ -12,8 +12,9 @@ Simple .NET 8 template with everything set up to show basic movie data with CRUD
 for linux systems try re-creating the migrations or updating the packages to a different sqlite library. Also check all of the filepaths in the code including in package.json.
 
 
-# Why?
-To write little or no javascript
+# Why? Isn't HTMX and Razor redundant?
+HTMX is superior in terms of the amount of boilerplate needed compared to razor. No need to write Javascript for AJAX Calls and this produces cleaner code overall.
+The goal in using HTMX is to avoid writing JS as much as possible, producing simpler code.
 
 ## Prerequisites
 
