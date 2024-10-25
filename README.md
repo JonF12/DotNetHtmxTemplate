@@ -59,12 +59,3 @@ Start the API locally by running the code below, or start it in visual studio wi
 ```bash
 dotnet run
 ```
-
-## Recommendations
-1.  **Move the database logic/services out onto a seperate project**
-2.  **Find some additional .js plugins or a framework for state management if needed**
-3.  **Move some of the View into components**
-4.  **Combine tailwind classes to compress HTML more**
-5.  **Improve the logic in the HtmxRequest attribute, it renders either a partial, or a full viewpage with layout depending on if it's the first time rendering or not.**
-6.  **If you want pure html with as little JS as possible use some of the built in razor directives e.g @Html.Action, which will help with rendering**
-7.  **Replace the custom htmx.AddExtension("submitjson") with a library if it exists, unfortunately htmx doesn't make it easy to send form data as JSON.**
