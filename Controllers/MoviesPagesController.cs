@@ -13,9 +13,9 @@ namespace DotNetHtmxTypescriptTemplate.Controllers
         private readonly AppDbContext appDbContext;
         private readonly IDatabaseService databaseService;
 
-        public MoviesPagesController(AppDbContext AppDbContext, IDatabaseService databaseService)
+        public MoviesPagesController(AppDbContext appDbContext, IDatabaseService databaseService)
         {
-            this.appDbContext = AppDbContext;
+            this.appDbContext = appDbContext;
             this.databaseService = databaseService;
         }
 

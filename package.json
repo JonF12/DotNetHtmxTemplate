@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build:css": "npx tailwindcss -i ./wwwroot/css/tailwind.css -o ./wwwroot/css/site.css --watch",
+    "build:css": "npx tailwindcss -i ./wwwroot/css/tailwind.css -o ./wwwroot/css/site.css",
     "build:htmx": "copy \"./node_modules/htmx.org/dist/htmx.min.js\" \"./wwwroot/js/\" "
   },
   "keywords": [],

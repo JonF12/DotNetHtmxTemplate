@@ -5,7 +5,7 @@
 
 <main role="main" class="flex-1 p-8">
 
-    <h1 class="text-color-orange text-5xl font-bold">Add Movie</h1>
+    <h1 class="heading-main">Add Movie</h1>
 
     <p>Add a new movie here:</p>
 
@@ -47,38 +47,3 @@
     </div>
 
 </main>
-
-<script>
-    htmx.on('htmx:afterOnLoad', function (evt) {
-        const popup = document.getElementById('popup');
-        const popupMessage = document.getElementById('popup-message');
-
-        popup.classList.add('bg-green-500', 'text-white'); // Success style
-        popup.classList.remove('bg-red-500');
-        popupMessage.innerText = "Movie added successfully!";
-
-        // Show the popup
-        popup.classList.remove('hidden');
-
-        // Hide the popup after 3 seconds
-        setTimeout(() => {
-            popup.classList.add('hidden');
-        }, 3000);
-    });
-    htmx.on('htmx:responseError', function (evt) {
-        const popup = document.getElementById('popup');
-        const popupMessage = document.getElementById('popup-message');
-
-        popup.classList.add('bg-red-500', 'text-white'); // Error style
-        popup.classList.remove('bg-green-500');
-        popupMessage.innerText = "Failed to add movie!";
-        
-        // Show the popup
-        popup.classList.remove('hidden');
-
-        // Hide the popup after 3 seconds
-        setTimeout(() => {
-            popup.classList.add('hidden');
-        }, 3000);
-    });
-</script>

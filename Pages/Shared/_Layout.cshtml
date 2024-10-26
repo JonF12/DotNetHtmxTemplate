@@ -36,14 +36,8 @@
     <div class="flex min-h-screen">
         <!-- Sidebar -->
         @await Html.PartialAsync("_Navigation")
-
         <!-- Main Content -->
-        @RenderBody()
-        
+        @RenderBody()        
     </div>
-
-    <footer>
-        @RenderSection("Scripts", required: false)
-    </footer>
 </body>
 </html>

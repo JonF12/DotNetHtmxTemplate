@@ -1,7 +1,5 @@
 using DotNetHtmxTypescriptTemplate.Data;
 using DotNetHtmxTypescriptTemplate.Services;
-using System.Text;
-using WebMarkupMin.AspNetCore8;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,24 +11,6 @@ builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddControllers();
 
 builder.Services.AddTransient<IDatabaseService, DatabaseService>();
-
-builder.Services.AddWebMarkupMin(options =>
-{
-    options.AllowMinificationInDevelopmentEnvironment = true; 
-    options.AllowCompressionInDevelopmentEnvironment = true;
-})
-.AddHtmlMinification(options =>
-{
-    options.MinificationSettings.RemoveOptionalEndTags = true;
-    options.MinificationSettings.MinifyInlineCssCode = true;
-    options.MinificationSettings.MinifyInlineJsCode = true;
-    options.MinificationSettings.PreserveNewLines = false;
-    options.MinificationSettings.WhitespaceMinificationMode = WebMarkupMin.Core.WhitespaceMinificationMode.Aggressive; // Removes extra spaces
-    options.MinificationSettings.RemoveHtmlComments = true; // Remove comments from output
-})
-.AddHttpCompression(options => { 
-    
-});
 
 var app = builder.Build();
 
@@ -51,9 +31,6 @@ app.UseEndpoints(endpoints => //may not be needed, go check
         pattern: "{controller=MoviesPages}/{action=Index}/");
 });
 
-// Use WebMarkupMin for minifying HTML
-app.UseWebMarkupMin();
-
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
@@ -61,7 +38,5 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
-//app.MapRazorPages();
 
 app.Run();
