@@ -1,0 +1,20 @@
+﻿@using DotNetHtmxTemplate.Models;
+@model PaginatedResponse<MovieModel>
+<main role="main" class="flex-1 p-8">
+
+    <h1 class="heading-main">View Movies</h1>
+
+    <form hx-post="/movies/paginated"
+          hx-target="#movie-list"
+          hx-trigger="submit"
+          hx-swap="innerHTML"
+          hx-encoding="application/json"
+          hx-ext="submitjson"
+          class="space-y-6 rounded-md bg-white p-6 shadow-md">
+
+        <div id="movie-list" class="min-h-[150px] rounded-md border border-gray-300 bg-gray-100 p-4">
+            @await Html.PartialAsync("MovieCard.cshtml", Model)
+        </div>
+    </form>
+</main>
+

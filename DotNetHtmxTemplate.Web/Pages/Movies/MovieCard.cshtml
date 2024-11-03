@@ -1,0 +1,76 @@
+﻿@using DotNetHtmxTemplate.Models;
+@model PaginatedResponse<MovieModel>
+@{
+
+}
+@if (Model != null)
+{
+    <div class="grid-cols-1 grid gap-6 p-4 sm:grid-cols-2 md:grid-cols-3">
+        @foreach (var movie in Model.Hits)
+        {
+            <div class="relative min-h-[200px] w-full overflow-hidden rounded-lg bg-white p-6 shadow-md transition-shadow duration-300 hover:shadow-lg">
+                <div id="movie-@movie.Id">
+                    @if (movie.Id != null)
+                    {
+                        <!-- Delete Button (Positioned relative to the movie card) -->
+                        <button class="absolute right-2 top-2 text-red-500 hover:text-red-700"
+                                hx-delete="/api/movies/@movie.Id"
+                                hx-vals='{"Id": "@movie.Id"}'
+                                hx-target="#movie-@movie.Id"
+                                hx-swap="outerHTML"
+                                hx-confirm="Are you sure you want to delete this movie?"
+                                title="Delete Movie">
+                            X
+                        </button>
+                    }
+
+                    <!-- Movie Content -->
+                    <div class="p-6">
+                        <h3 class="mb-2 truncate text-xl font-bold text-gray-800">
+                            @if (!string.IsNullOrEmpty(movie.Title))
+                            {
+                                @movie.Title
+                            }
+                        </h3>
+
+                        @if (!string.IsNullOrEmpty(movie.Genre))
+                        {
+                            <p class="mb-2 truncate text-gray-600"><strong>Genre:</strong> @movie.Genre</p>
+                        }
+
+                        @if (movie.ReleaseDate.HasValue)
+                        {
+                            <p class="text-gray-600"><strong>Release Date:</strong> @movie.ReleaseDate?.ToString("MMMM dd, yyyy")</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="flex justify-between">
+        @if (Model.CanGoPrevious)
+        {
+            <button id="previous-page-btn"
+                hx-post="/movies/paginated"
+                hx-vals='{"PageSize": @Model.PageSize, "StartFrom": @Model.Prev}'
+                hx-target="#movie-list"
+                hx-swap="innerHTML"
+                type="button"
+                class="rounded bg-gray-500 px-4 py-2 font-bold text-white shadow-md hover:bg-gray-600">
+                Previous Page
+            </button>
+        }
+        @if (Model.CanGoNext)
+        {
+            <button id="next-page-btn"
+                hx-post="/movies/paginated"
+                hx-vals='{"PageSize": @Model.PageSize, "StartFrom": @Model.Next}'
+                hx-target="#movie-list"
+                hx-swap="innerHTML"
+                type="button"
+                class="rounded bg-blue-500 px-4 py-2 font-bold text-white shadow-md hover:bg-blue-600">
+                Next Page
+            </button>
+        }
+    </div>
+}
