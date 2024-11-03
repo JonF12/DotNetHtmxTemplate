@@ -1,4 +1,4 @@
-﻿namespace DotNetHtmxTypescriptTemplate.Movies
+﻿namespace DotNetHtmxTypescriptTemplate.Models
 {
     public class GetMoviesPaginatedRequest
     {

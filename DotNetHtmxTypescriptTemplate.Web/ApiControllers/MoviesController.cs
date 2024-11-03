@@ -1,11 +1,9 @@
 ﻿
-using DotNetHtmxTypescriptTemplate.Data;
-using DotNetHtmxTypescriptTemplate.Movies;
-using DotNetHtmxTypescriptTemplate.Services;
+using DotNetHtmxTypescriptTemplate.Repository.Data;
+using DotNetHtmxTypescriptTemplate.Models;
+using DotNetHtmxTypescriptTemplate.Repository.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-
 
 namespace DotNetHtmxTypescriptTemplate.ApiControllers
 {

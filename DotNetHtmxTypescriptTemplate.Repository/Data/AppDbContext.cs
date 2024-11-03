@@ -1,7 +1,7 @@
-using DotNetHtmxTypescriptTemplate.Movies;
+using DotNetHtmxTypescriptTemplate.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace DotNetHtmxTypescriptTemplate.Data
+namespace DotNetHtmxTypescriptTemplate.Repository.Data
 {
     public class AppDbContext : DbContext
     {
@@ -9,7 +9,7 @@ namespace DotNetHtmxTypescriptTemplate.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=./Data/App.db");
+            optionsBuilder.UseSqlite("Data Source=../DotNetHtmxTypescriptTemplate.Repository/Data/App.db");
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using DotNetHtmxTypescriptTemplate.Movies;
+﻿using DotNetHtmxTypescriptTemplate.Models;
 
-namespace DotNetHtmxTypescriptTemplate.Services
+namespace DotNetHtmxTypescriptTemplate.Repository.Services
 {
     public interface IDatabaseService
     {

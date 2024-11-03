@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace DotNetHtmxTypescriptTemplate.Movies
+namespace DotNetHtmxTypescriptTemplate.Models
 {
     public class MovieModel
     {

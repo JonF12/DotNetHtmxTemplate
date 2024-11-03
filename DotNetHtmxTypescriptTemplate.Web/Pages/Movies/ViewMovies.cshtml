@@ -1,8 +1,8 @@
 ﻿@page
 @{
-
+    
 }
-
+@using DotNetHtmxTypescriptTemplate.Models;
 <main role="main" class="flex-1 p-8">
 
     <h1 class="heading-main">View Movies</h1>
@@ -17,7 +17,7 @@
           class="space-y-6 rounded-md bg-white p-6 shadow-md">
 
         <div id="movie-list" class="min-h-[150px] rounded-md border border-gray-300 bg-gray-100 p-4">
-            @await Html.PartialAsync("MovieCard.cshtml", new List<DotNetHtmxTypescriptTemplate.Movies.MovieModel>())
+            @await Html.PartialAsync("MovieCard.cshtml", new List<MovieModel>())
         </div>
 
         <div class="flex justify-between">

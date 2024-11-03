@@ -1,5 +1,5 @@
-using DotNetHtmxTypescriptTemplate.Data;
-using DotNetHtmxTypescriptTemplate.Services;
+using DotNetHtmxTypescriptTemplate.Repository.Data;
+using DotNetHtmxTypescriptTemplate.Repository.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

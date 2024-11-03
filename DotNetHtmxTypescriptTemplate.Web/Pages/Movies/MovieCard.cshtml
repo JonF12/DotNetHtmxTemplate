@@ -1,9 +1,9 @@
-﻿@model List<DotNetHtmxTypescriptTemplate.Movies.MovieModel>
-
+﻿@using DotNetHtmxTypescriptTemplate.Models;
+@model List<MovieModel>
 @{
     while (Model.Count < 3)
     {
-        Model.Add(new DotNetHtmxTypescriptTemplate.Movies.MovieModel());
+        Model.Add(new MovieModel());
     }
 }
 

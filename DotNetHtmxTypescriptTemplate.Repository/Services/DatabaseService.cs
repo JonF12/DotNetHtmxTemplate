@@ -1,8 +1,8 @@
-﻿using DotNetHtmxTypescriptTemplate.Data;
-using DotNetHtmxTypescriptTemplate.Movies;
+﻿using DotNetHtmxTypescriptTemplate.Repository.Data;
+using DotNetHtmxTypescriptTemplate.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace DotNetHtmxTypescriptTemplate.Services
+namespace DotNetHtmxTypescriptTemplate.Repository.Services
 {
     public class DatabaseService : IDatabaseService
     {
