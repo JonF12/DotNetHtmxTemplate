@@ -1,28 +1,48 @@
-﻿<nav class="navbar-main">
-    <ul class="space-y-3">
-        <li>
-            <a href="/"
-               hx-push-url="/"
-               hx-get="/"
-               hx-target="main"
-               hx-swap="outerHTML"
-               class="navbar-main-opt">Home</a>
-        </li>
-        <li>
-            <a href="/addmovies"
-               hx-push-url="/addmovies"
-               hx-get="/addmovies"
-               hx-target="main"
-               hx-swap="outerHTML"
-               class="navbar-main-opt">Add Movie</a>
-        </li>
-        <li>
-            <a href="/viewmovies"
-               hx-push-url="/viewmovies"
-               hx-get="/viewmovies"
-               hx-target="main"
-               hx-swap="outerHTML"
-               class="navbar-main-opt">View Movies</a>
-        </li>
-    </ul>
+﻿<nav class="navbar-main transition-all duration-200">
+    <!-- Flex container taking full height with space between content -->
+    <div class="flex h-full flex-col">
+        <!-- Menu items at top -->
+        <ul class="space-y-3">
+            <li>
+                <a href="/"
+                   hx-push-url="/"
+                   hx-get="/"
+                   hx-target="main"
+                   hx-swap="outerHTML"
+                   class="navbar-main-opt">Dashboard</a>
+            </li>
+            <li>
+                <a href="/addmovies"
+                   hx-push-url="/addmovies"
+                   hx-get="/addmovies"
+                   hx-target="main"
+                   hx-swap="outerHTML"
+                   class="navbar-main-opt">Add Movie</a>
+            </li>
+            <li>
+                <a href="/viewmovies"
+                   hx-push-url="/viewmovies"
+                   hx-get="/viewmovies"
+                   hx-target="main"
+                   hx-swap="outerHTML"
+                   class="navbar-main-opt">View Movies</a>
+            </li>
+        </ul>
+
+        <div class="mt-auto flex justify-center">
+            <button class="flex min-h-[48px] min-w-[48px] items-center justify-center p-2 text-white hover:text-gray-200"
+                    onclick="document.querySelector('.navbar-main').classList.toggle('collapsed')">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="h-6 w-6 transform transition-transform duration-200"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor">
+                    <path stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M15 4l-8 8 8 8" /> <!-- Adjusted path to be centered -->
+                </svg>
+            </button>
+        </div>
+    </div>
 </nav>

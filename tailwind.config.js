@@ -8,7 +8,11 @@ module.exports = {
         './wwwroot/**/*.html'
     ],
     theme: {
-        extend: {},
+        extend: {
+            fontFamily: {
+                sans: ['Open Sans', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif'],
+            },
+        },
     },
     plugins: [],
 }
