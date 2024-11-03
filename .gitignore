@@ -39,4 +39,4 @@ package-lock.json
 appsettings.Development.json
 
 #uploads wwwroot
-/wwwroot/uploads
+/**/wwwroot/uploads
