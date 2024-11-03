@@ -107,7 +107,7 @@
 }
 
 main {
-    @apply min-h-screen;
+    @apply ml-64 h-full min-h-screen w-full overflow-y-auto p-4;
     background: linear-gradient(to bottom right, #f8fafc, #f1f5f9);
     background-image: linear-gradient(to bottom right, #f8fafc, #f1f5f9), radial-gradient(at 40% 20%, rgba(100, 116, 139, 0.03) 0px, transparent 50%), radial-gradient(at 80% 0%, rgba(51, 65, 85, 0.03) 0px, transparent 50%);
 }
@@ -118,10 +118,10 @@ main {
 }
 
 .navbar-main {
-    @apply h-screen w-64 p-4 text-white transition-all duration-200;
+    @apply fixed left-0 top-0 h-full min-h-screen w-64 p-4 text-white transition-all duration-200;
     background: linear-gradient(180deg, #1f2937 0%, #111827 100%);
-    box-shadow: inset -2px 0 8px rgba(0, 0, 0, 0.2), 4px 0 8px -2px rgba(0, 0, 0, 0.05); /* Subtle outer shadow */
-    border-right: 1px solid rgba(255, 255, 255, 0.05); /* Very subtle light border */
+    box-shadow: inset -2px 0 8px rgba(0, 0, 0, 0.2);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
 }
 .navbar-main-opt {
     @apply block overflow-hidden whitespace-nowrap px-4 py-1 transition-all duration-200;
@@ -136,6 +136,9 @@ main {
 }
 .navbar-main.collapsed {
     @apply w-16; 
+}
+.navbar-main.collapsed ~ main {
+    @apply ml-16;
 }
 .navbar-main.collapsed ul {
     @apply opacity-0 invisible;

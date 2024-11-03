@@ -1,5 +1,6 @@
 using DotNetHtmxTemplate.Repository.Data;
 using DotNetHtmxTemplate.Repository.Services;
+using Microsoft.AspNetCore.Http.Features;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,23 @@ builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddControllers();
 
 builder.Services.AddTransient<IDatabaseService, DatabaseService>();
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.ValueLengthLimit = int.MaxValue;
+    options.MultipartBodyLengthLimit = long.MaxValue; // In bytes
+    options.MultipartHeadersLengthLimit = int.MaxValue;
+    options.ValueCountLimit = int.MaxValue;
+    options.MemoryBufferThreshold = int.MaxValue;
+});
+builder.Services.AddMvc();
+builder.Services.AddMvcCore();
+
+// Configure IIS
+builder.Services.Configure<IISServerOptions>(options =>
+{
+    options.MaxRequestBodySize = int.MaxValue;
+    options.MaxRequestBodyBufferSize = int.MaxValue;
+});
 
 var app = builder.Build();
 

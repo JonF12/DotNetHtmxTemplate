@@ -1,0 +1,13 @@
+﻿@model List<string>
+
+@if (Model != null && Model.Any())
+{
+    <div class="space-y-2">
+        @foreach (var fileName in Model)
+        {
+            <div class="flex items-center justify-between rounded bg-green-100 p-2">
+                <span class="text-green-700">✓ @fileName uploaded successfully</span>
+            </div>
+        }
+    </div>
+}

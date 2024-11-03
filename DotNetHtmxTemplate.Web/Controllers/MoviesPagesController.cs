@@ -6,15 +6,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DotNetHtmxTemplate.Controllers
 {
+    [DisableRequestSizeLimit]
+[RequestFormLimits(MultipartBodyLengthLimit = long.MaxValue)]
     public class MoviesPagesController : BaseController
     {   
         private readonly AppDbContext appDbContext;
         private readonly IDatabaseService databaseService;
+        private readonly IWebHostEnvironment environment;
 
-        public MoviesPagesController(AppDbContext appDbContext, IDatabaseService databaseService)
+        public MoviesPagesController(AppDbContext appDbContext, IDatabaseService databaseService, IWebHostEnvironment environment)
         {
             this.appDbContext = appDbContext;
             this.databaseService = databaseService;
+            this.environment = environment;
         }
 
         [Route("/")]
@@ -41,6 +45,57 @@ namespace DotNetHtmxTemplate.Controllers
                 TotalHits = response.totalHits
             };
             return GetPage("Pages/Movies/ViewMovies.cshtml", responseModel);
+        }
+
+        [Route("/images")]
+        public async Task<IActionResult> ViewImages()
+        {
+            return GetPage("Pages/Movies/Images.cshtml");
+        }
+
+        [Route("/upload")]
+        [RequestFormLimits(MultipartBodyLengthLimit = 52428800)]
+        [RequestSizeLimit(52428800)]
+        public async Task<IActionResult> UploadImage()
+        {
+            try
+            {
+                var uploadedFiles = new List<string>();
+                var files = Request.Form.Files;
+
+                if (files == null || files.Count == 0)
+                {
+                    return PartialView("Pages/Movies/FileUploadStatus", uploadedFiles);
+                }
+
+                string uploadsFolder = Path.Combine(environment.WebRootPath, "uploads");
+                Directory.CreateDirectory(uploadsFolder);
+
+                foreach (var file in files)
+                {
+                    if (file.Length > 0)
+                    {
+                        var fileName = Path.GetFileName(file.FileName);
+                        var safeFileName = $"{DateTime.Now:yyyyMMddHHmmss}_{Guid.NewGuid()}_{fileName}";
+                        var filePath = Path.Combine(uploadsFolder, safeFileName);
+
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await file.CopyToAsync(stream);
+                        }
+
+                        uploadedFiles.Add(fileName);
+                    }
+                }
+
+                Response.Headers.Add("HX-Trigger", "fileUploadComplete");
+                return PartialView("Pages/Movies/FileUploadStatus", uploadedFiles);
+            }
+            catch (Exception ex)
+            {
+                Response.StatusCode = 500;
+                return PartialView("Pages/Movies/FileUploadStatus", new List<string> { "Error uploading files" });
+            }
         }
 
         [HttpPost]

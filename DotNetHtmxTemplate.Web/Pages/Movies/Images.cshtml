@@ -1,0 +1,45 @@
+﻿<main role="main" class="flex-1 p-8">
+    <div class="upload-container mx-auto max-w-md p-6">
+        <form id="upload-form"
+              hx-post="/upload"
+              hx-encoding="multipart/form-data"
+              hx-target="#upload-status"
+              class="relative">
+            <div class="border-2 rounded-lg border-dashed border-gray-300 p-8 text-center transition-colors hover:border-blue-500 hover:bg-gray-50"
+                 hx-trigger="drop[preventDefault] from:#fileInput"
+            @* Move hx-post and other attributes to the input *@>
+                <input type="file"
+                       id="fileInput"
+                       name="files"
+                       multiple
+                       class="opacity-0 absolute inset-0 h-full w-full cursor-pointer"
+                       hx-post="/upload"
+                       hx-target="#upload-status"
+                       hx-encoding="multipart/form-data"
+                       hx-trigger="change">
+
+                <!-- SVG and text container -->
+                <div class="pointer-events-none">
+                    <div class="flex-shrink-0 inline-block h-8 w-8">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             width="32"
+                             height="32"
+                             viewBox="0 0 24 24"
+                             class="text-gray-400"
+                             style="width: 32px; height: 32px;"
+                             fill="none"
+                             stroke="currentColor">
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
+                            </path>
+                        </svg>
+                    </div>
+                    <p class="mt-2 text-gray-600">Drag and drop files here or click to select files</p>
+                </div>
+            </div>
+        </form>
+        <div id="upload-status" class="mt-4"></div>
+    </div>
+</main>
