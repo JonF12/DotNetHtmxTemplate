@@ -1,48 +1,20 @@
-﻿@page
-@{
-    
-}
-@using DotNetHtmxTypescriptTemplate.Models;
+﻿@using DotNetHtmxTypescriptTemplate.Models;
+@model PaginatedResponse<MovieModel>
 <main role="main" class="flex-1 p-8">
 
     <h1 class="heading-main">View Movies</h1>
 
     <form hx-post="/movies/paginated"
           hx-target="#movie-list"
-          hx-trigger="submit,load"
+          hx-trigger="submit"
           hx-swap="innerHTML"
           hx-encoding="application/json"
           hx-ext="submitjson"
-          hx-vals='{"PageSize": 3, "StartFrom": 0}'
           class="space-y-6 rounded-md bg-white p-6 shadow-md">
 
         <div id="movie-list" class="min-h-[150px] rounded-md border border-gray-300 bg-gray-100 p-4">
-            @await Html.PartialAsync("MovieCard.cshtml", new List<MovieModel>())
-        </div>
-
-        <div class="flex justify-between">
-            <button id="previous-page-btn"
-                    hx-post="/movies/paginated"
-                    hx-vals='{"PageSize": 3, "StartFrom": 0}'
-                    hx-target="#movie-list"
-                    hx-swap="innerHTML"
-                    type="button"
-                    class="rounded bg-gray-500 px-4 py-2 font-bold text-white shadow-md hover:bg-gray-600"
-                    disabled>
-                Previous Page
-            </button>
-            <button id="next-page-btn"
-                    hx-post="/movies/paginated"
-                    hx-vals='{"PageSize": 3, "StartFrom": 3}'
-                    hx-target="#movie-list"
-                    hx-swap="innerHTML"
-                    type="button"
-                    class="rounded bg-blue-500 px-4 py-2 font-bold text-white shadow-md hover:bg-blue-600">
-                Next Page
-            </button>
+            @await Html.PartialAsync("MovieCard.cshtml", Model)
         </div>
     </form>
-
-    <script src="/js/pagination.js"></script>
 </main>
 

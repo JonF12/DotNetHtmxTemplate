@@ -14,9 +14,6 @@
 		<PackageReference Include="WebMarkupMin.Core" Version="2.17.0" />
 	</ItemGroup>
 	<ItemGroup>
-		<Folder Include="Middleware\" />
-	</ItemGroup>
-	<ItemGroup>
 	  <ProjectReference Include="..\DotNetHtmxTypescriptTemplate.Models\DotNetHtmxTypescriptTemplate.Models.csproj" />
 	  <ProjectReference Include="..\DotNetHtmxTypescriptTemplate.Repository\DotNetHtmxTypescriptTemplate.Repository.csproj" />
 	</ItemGroup>

@@ -12,13 +12,15 @@ namespace DotNetHtmxTypescriptTemplate.Repository.Services
         {
             _appDbContext = appDbContext;
         }
-        public async Task<List<MovieModel>> GetMovies(int pageSize, int startFrom) 
+        public async Task<(List<MovieModel> hits, int totalHits)> GetMovies(int pageSize, int startFrom) 
         {
             var movies = await _appDbContext.Movies.AsQueryable()
                 .Skip(startFrom)
                 .Take(pageSize)
                 .ToListAsync();
-            return movies;
+            var count = await _appDbContext.Movies.AsQueryable()
+                .CountAsync();
+            return (movies, count);
         }
     }
 }

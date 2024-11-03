@@ -1,12 +1,12 @@
-﻿using DotNetHtmxTypescriptTemplate.Repository.Data;
-using DotNetHtmxTypescriptTemplate.Models;
+﻿using DotNetHtmxTypescriptTemplate.Models;
+using DotNetHtmxTypescriptTemplate.Repository.Data;
 using DotNetHtmxTypescriptTemplate.Repository.Services;
-using DotNetHtmxTypescriptTemplate.Utils;
+using DotNetHtmxTypescriptTemplate.Web.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotNetHtmxTypescriptTemplate.Controllers
 {
-    public class MoviesPagesController : Controller
+    public class MoviesPagesController : BaseController
     {   
         private readonly AppDbContext appDbContext;
         private readonly IDatabaseService databaseService;
@@ -18,36 +18,46 @@ namespace DotNetHtmxTypescriptTemplate.Controllers
         }
 
         [Route("/")]
-        [HtmxRequest("Pages/Index.cshtml")]
         public IActionResult Index()
         {
-            return View();
+            return GetPage("Pages/Index.cshtml");
         }
         
         [Route("/addmovies")]
-        [HtmxRequest("Pages/Movies/AddMovies.cshtml")]
         public IActionResult AddMovies()
         {
-            return View();
+            return GetPage("Pages/Movies/AddMovies.cshtml");
         }
         
-        [Route("/ViewMovies")]
-        [HtmxRequest("Pages/Movies/ViewMovies.cshtml")]
-        public IActionResult ViewMovies()
+        [Route("/viewmovies")]
+        public async Task<IActionResult> ViewMovies(int startFrom = 0, int pageSize = 3)
         {
-
-            return View();
+            var response = await databaseService.GetMovies(pageSize, startFrom);
+            var responseModel = new PaginatedResponse<MovieModel>
+            {
+                Hits = response.hits,
+                StartFrom = startFrom,
+                PageSize = pageSize,
+                TotalHits = response.totalHits
+            };
+            return GetPage("Pages/Movies/ViewMovies.cshtml", responseModel);
         }
 
-        //Extracted both methods to a common service with DI.
-        //Controllers should be kept free of any logic whatsoever anyway.
         [HttpPost]
         [Route("movies/paginated")]
-        [IgnoreAntiforgeryToken] //probably not needed, was testing something
-        public async Task<PartialViewResult> GetMoviesPaginated([FromBody] GetMoviesPaginatedRequest request)
+        [IgnoreAntiforgeryToken]
+        public async Task<PartialViewResult> GetMoviesPaginated([FromBody] PaginatedRequest request)
         {
-            var movies = await databaseService.GetMovies(request.PageSize, request.StartFrom);
-            return PartialView("Pages/Movies/MovieCard.cshtml", movies);
+            var response = await databaseService.GetMovies(request.PageSize, request.StartFrom);
+            var model = new PaginatedResponse<MovieModel>
+            {
+                PageSize = request.PageSize,
+                StartFrom = request.StartFrom,
+                TotalHits = response.totalHits,
+                Hits = response.hits
+            };
+
+            return PartialView("Pages/Movies/MovieCard.cshtml", model);
         }
     }
 }

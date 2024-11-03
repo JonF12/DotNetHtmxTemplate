@@ -7,9 +7,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DotNetHtmxTypescriptTemplate.ApiControllers
 {
-    //split APIControllers for json response and MVC Controllers for html
-    //this makes more sense because now you also have an API that's capable of producing JSON without HTML formatting, if you wish to use this as both an API and a web UI.
-    //useful if youre making a tool that needs a UI for less technical people but just an API for others
     [ApiController]
     [Route("api/[controller]/")]
     public class MoviesController : ControllerBase
@@ -72,16 +69,12 @@ namespace DotNetHtmxTypescriptTemplate.ApiControllers
             return Ok();
         }
 
-
-        //Extracted both methods to a common service with DI.
-        //Controllers should be kept free of any logic whatsoever anyway.
         [HttpPost]
         [Route("/paginated")]
-        [IgnoreAntiforgeryToken]
-        public async Task<ActionResult<List<MovieModel>>> GetMoviesPaginated([FromBody] GetMoviesPaginatedRequest request)
+        public async Task<ActionResult<List<MovieModel>>> GetMoviesPaginated([FromBody] PaginatedRequest request)
         {
             var movies = await databaseService.GetMovies(request.PageSize, request.StartFrom);
-            return Ok(movies);
+            return Ok(movies.hits);
         }
     }
 }
