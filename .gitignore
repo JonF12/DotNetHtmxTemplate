@@ -34,5 +34,9 @@ packages/
 node_modules/
 #package lock json
 package-lock.json
+
 #appsettings
 appsettings.Development.json
+
+#uploads wwwroot
+/wwwroot/uploads
