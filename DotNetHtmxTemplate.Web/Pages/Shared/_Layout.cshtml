@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var currentRoute = Context.Request.Path.Value?.ToLower();
+    var isAuthPage = currentRoute?.Contains("/authentication") ?? false;
+    var isAuthenticated = User.Identity?.IsAuthenticated ?? false;
+    var shouldRenderNav = isAuthenticated && !isAuthPage;
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -33,11 +39,21 @@
     </script>
 </head>
 <body>
-    <div class="flex h-full min-h-screen">
-        <!-- Sidebar -->
-        @await Html.PartialAsync("_Navigation")
-        <!-- Main Content -->
-        @RenderBody()
-    </div>
+        @if (shouldRenderNav)
+        {
+            <div class="flex h-full min-h-screen">
+                <!-- Sidebar -->
+                @await Html.PartialAsync("_Navigation")
+                <!-- Main Content -->
+                @RenderBody()
+            </div>
+        }
+        else
+        {
+            <div class="flex h-full min-h-screen justify-center">
+                @RenderBody()
+            </div>
+        }
+  
 </body>
 </html>

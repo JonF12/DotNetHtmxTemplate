@@ -2,12 +2,14 @@
 using DotNetHtmxTemplate.Repository.Data;
 using DotNetHtmxTemplate.Repository.Services;
 using DotNetHtmxTemplate.Web.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotNetHtmxTemplate.Controllers
 {
+    [Authorize]
     [DisableRequestSizeLimit]
-[RequestFormLimits(MultipartBodyLengthLimit = long.MaxValue)]
+    [RequestFormLimits(MultipartBodyLengthLimit = long.MaxValue)]
     public class MoviesPagesController : BaseController
     {   
         private readonly AppDbContext appDbContext;
@@ -65,7 +67,7 @@ namespace DotNetHtmxTemplate.Controllers
 
                 if (files == null || files.Count == 0)
                 {
-                    return PartialView("Pages/Movies/FileUploadStatus", uploadedFiles);
+                    return PartialView("Pages/Movies/FileUploadStatus.cshtml", uploadedFiles);
                 }
 
                 string uploadsFolder = Path.Combine(environment.WebRootPath, "uploads");
@@ -89,12 +91,12 @@ namespace DotNetHtmxTemplate.Controllers
                 }
 
                 Response.Headers.Add("HX-Trigger", "fileUploadComplete");
-                return PartialView("Pages/Movies/FileUploadStatus", uploadedFiles);
+                return PartialView("Pages/Movies/FileUploadStatus.cshtml", uploadedFiles);
             }
             catch (Exception ex)
             {
                 Response.StatusCode = 500;
-                return PartialView("Pages/Movies/FileUploadStatus", new List<string> { "Error uploading files" });
+                return PartialView("Pages/Movies/FileUploadStatus.cshtml", new List<string> { "Error uploading files" });
             }
         }
 

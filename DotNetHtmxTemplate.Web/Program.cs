@@ -1,5 +1,6 @@
 using DotNetHtmxTemplate.Repository.Data;
 using DotNetHtmxTemplate.Repository.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http.Features;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,17 @@ builder.Services.Configure<IISServerOptions>(options =>
     options.MaxRequestBodySize = int.MaxValue;
     options.MaxRequestBodyBufferSize = int.MaxValue;
 });
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/authentication";
+        options.AccessDeniedPath = "/authentication";
+        options.Cookie.Name = "DotNetHtmxTemplate";
+        options.Cookie.HttpOnly = true;
+        options.ExpireTimeSpan = TimeSpan.FromHours(24);
+        options.SlidingExpiration = true;
+    });
+
 
 var app = builder.Build();
 
@@ -41,20 +53,15 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseRouting();
-
-app.UseEndpoints(endpoints => //may not be needed, go check
-{
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=MoviesPages}/{action=Index}/");
-});
-
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=MoviesPages}/{action=/}/");
 
 app.Run();

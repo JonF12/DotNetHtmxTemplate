@@ -5,6 +5,7 @@ module.exports = {
         './Views/**/*.cshtml',
         './Views/*.cshtml',
         './Pages/**/*.cshtml',
+        './Pages/*.cshtml',
         './wwwroot/**/*.html'
     ],
     theme: {

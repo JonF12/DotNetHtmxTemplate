@@ -3,6 +3,7 @@
         <ul class="space-y-3">
             <li>
                 <a href="/"
+                   hx-on::after-swap-error="reload"
                    hx-push-url="/"
                    hx-get="/"
                    hx-target="main"
@@ -11,6 +12,7 @@
             </li>
             <li>
                 <a href="/addmovies"
+                   hx-on::after-swap-error="reload"
                    hx-push-url="/addmovies"
                    hx-get="/addmovies"
                    hx-target="main"
@@ -19,6 +21,7 @@
             </li>
             <li>
                 <a href="/viewmovies"
+                   hx-on::after-swap-error="reload"
                    hx-push-url="/viewmovies"
                    hx-get="/viewmovies"
                    hx-target="main"
@@ -27,6 +30,7 @@
             </li>
             <li>
                 <a href="/images"
+                   hx-on::after-swap-error="reload"
                    hx-push-url="/images"
                    hx-get="/images"
                    hx-target="main"
