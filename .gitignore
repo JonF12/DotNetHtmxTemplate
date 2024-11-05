@@ -40,3 +40,6 @@ appsettings.Development.json
 
 #uploads wwwroot
 /**/wwwroot/uploads
+/DotNetHtmxTemplate.Repository/Data/App.db
+/DotNetHtmxTemplate.Repository/Data/App.db-shm
+/DotNetHtmxTemplate.Repository/Data/App.db-wal
