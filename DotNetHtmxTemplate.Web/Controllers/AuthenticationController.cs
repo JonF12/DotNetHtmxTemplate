@@ -41,7 +41,8 @@ namespace DotNetHtmxTemplate.Web.Controllers
 
                 return Redirect("/");
             }
-            return RedirectToAction("Index", "Authentication");
+            TempData["Error"] = "Failed To Log In";
+            return View("Pages/Authentication.cshtml");
         }
     }
 }
