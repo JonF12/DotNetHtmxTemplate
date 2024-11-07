@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="~/css/site.css" />
         <script src="~/js/htmx.min.js"></script>
         <script>
-            htmx.on('htmx:beforeSwap', function (evt) {
+            htmx.on('htmx:afterRequest', function (evt) {
                 if (evt.detail.xhr.status === 401 || evt.detail.xhr.status === 302 || evt.detail.xhr.redirected) {
                     const redirectUrl = evt.detail.xhr.getResponseHeader('HX-Redirect') ||
                         evt.detail.xhr.responseURL ||

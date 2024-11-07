@@ -58,6 +58,37 @@ void AddServices()
         options.Cookie.HttpOnly = true;
         options.ExpireTimeSpan = TimeSpan.FromHours(24);
         options.SlidingExpiration = true;
+        options.Events = new CookieAuthenticationEvents
+        {
+            OnRedirectToLogin = context =>
+            {
+                // Check if it's an HTMX request
+                if (context.Request.Headers.ContainsKey("HX-Request"))
+                {
+                    context.Response.Headers["HX-Redirect"] = context.RedirectUri;
+                    context.Response.StatusCode = 401;
+                }
+                else
+                {
+                    context.Response.Redirect(context.RedirectUri);
+                }
+                return Task.CompletedTask;
+            },
+
+            OnRedirectToAccessDenied = context =>
+            {
+                if (context.Request.Headers.ContainsKey("HX-Request"))
+                {
+                    context.Response.Headers["HX-Redirect"] = "/authentication";
+                    context.Response.StatusCode = 403;
+                }
+                else
+                {
+                    context.Response.Redirect("/authentication");
+                }
+                return Task.CompletedTask;
+            }
+        };
     });
 
 
