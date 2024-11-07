@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using DotNetHtmxTemplate.Web.Models;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using DotNetHtmxTemplate.Web.Models;
 
 namespace DotNetHtmxTemplate.Web.Controllers
 {

@@ -3,55 +3,49 @@
         <ul class="space-y-3">
             <li>
                 <a href="/"
-                   hx-on::after-swap-error="reload"
-                   hx-push-url="/"
                    hx-get="/"
+                   hx-push-url="true"
                    hx-target="main"
-                   hx-swap="outerHTML"
+                   hx-swap="outerHTML transition:true"
+                   hx-on::after-swap-error="reload"
                    class="navbar-main-opt">Dashboard</a>
             </li>
             <li>
-                <a href="/addmovies"
-                   hx-on::after-swap-error="reload"
-                   hx-push-url="/addmovies"
-                   hx-get="/addmovies"
+                <a 
+                   href="/addmovies"
+                   hx-get="addmovies/"
+                   hx-push-url="true"
                    hx-target="main"
-                   hx-swap="outerHTML"
+                   hx-swap="outerHTML transition:true"
+                   hx-on::after-swap-error="reload"
                    class="navbar-main-opt">Add Movie</a>
             </li>
             <li>
                 <a href="/viewmovies"
-                   hx-on::after-swap-error="reload"
-                   hx-push-url="/viewmovies"
                    hx-get="/viewmovies"
+                   hx-push-url="true"
                    hx-target="main"
-                   hx-swap="outerHTML"
+                   hx-swap="outerHTML transition:true"
+                   hx-on::after-swap-error="reload"
                    class="navbar-main-opt">View Movies</a>
             </li>
             <li>
                 <a href="/images"
-                   hx-on::after-swap-error="reload"
-                   hx-push-url="/images"
                    hx-get="/images"
+                   hx-push-url="true"
                    hx-target="main"
-                   hx-swap="outerHTML"
+                   hx-swap="outerHTML transition:true"
+                   hx-on::after-swap-error="reload"
                    class="navbar-main-opt">View Images</a>
             </li>
         </ul>
-
         <div class="mt-auto flex justify-center">
             <button class="flex min-h-[48px] min-w-[48px] items-center justify-center p-2 text-white hover:text-gray-200"
                     onclick="document.querySelector('.navbar-main').classList.toggle('collapsed')">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     class="h-6 w-6 transform transition-transform duration-200"
-                     fill="none"
-                     viewBox="0 0 24 24"
-                     stroke="currentColor">
-                    <path stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M15 4l-8 8 8 8" /> 
-                </svg>
+                <img id="nav-collapse" 
+                     src="~/images/arrow.svg"
+                     class="h-6 w-6 transition-transform duration-200 [.collapsed_&]:rotate-180"
+                     alt="Toggle navigation" />
             </button>
         </div>
     </div>

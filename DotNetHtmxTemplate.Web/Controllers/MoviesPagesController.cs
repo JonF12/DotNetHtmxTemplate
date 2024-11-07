@@ -24,18 +24,21 @@ namespace DotNetHtmxTemplate.Controllers
         }
 
         [Route("/")]
+        [Authorize]
         public IActionResult Index()
         {
             return GetPage("Pages/Index.cshtml");
         }
         
         [Route("/addmovies")]
+        [Authorize]
         public IActionResult AddMovies()
         {
             return GetPage("Pages/Movies/AddMovies.cshtml");
         }
         
         [Route("/viewmovies")]
+        [Authorize]
         public async Task<IActionResult> ViewMovies(int startFrom = 0, int pageSize = 3)
         {
             var response = await databaseService.GetMovies(pageSize, startFrom);
@@ -50,6 +53,7 @@ namespace DotNetHtmxTemplate.Controllers
         }
 
         [Route("/images")]
+        [Authorize]
         public async Task<IActionResult> ViewImages()
         {
             return GetPage("Pages/Movies/Images.cshtml");
@@ -58,6 +62,7 @@ namespace DotNetHtmxTemplate.Controllers
         [Route("/upload")]
         [RequestFormLimits(MultipartBodyLengthLimit = 52428800)]
         [RequestSizeLimit(52428800)]
+        [Authorize]
         public async Task<IActionResult> UploadImage()
         {
             try
@@ -102,7 +107,7 @@ namespace DotNetHtmxTemplate.Controllers
 
         [HttpPost]
         [Route("movies/paginated")]
-        [IgnoreAntiforgeryToken]
+        [Authorize]
         public async Task<PartialViewResult> GetMoviesPaginated([FromBody] PaginatedRequest request)
         {
             var response = await databaseService.GetMovies(request.PageSize, request.StartFrom);

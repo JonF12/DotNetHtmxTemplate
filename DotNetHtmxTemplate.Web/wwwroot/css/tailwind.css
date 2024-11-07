@@ -144,9 +144,11 @@ main {
     @apply opacity-0 invisible;
     width: 0;
 }
-.navbar-main.collapsed .flex-col > ul {
-    @apply hidden;
+.navbar-main #nav-collapse {
+    transition: transform 0.2s;
 }
-.navbar-main.collapsed svg {
-    @apply rotate-180;
+
+.navbar-main.collapsed #nav-collapse {
+    transform: rotate(180deg);
 }
+
